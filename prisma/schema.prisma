@@ -24,7 +24,7 @@ model Restaurant {
   products       Product[]
   orders         Order[]
   createdAt      DateTime       @default(now())
-  updateAt       DateTime       @updatedAt
+  updatedAt      DateTime       @updatedAt
 }
 
 model MenuCategory {
@@ -34,7 +34,7 @@ model MenuCategory {
   restaurantId String
   products     Product[]
   createdAt    DateTime   @default(now())
-  updateAt     DateTime   @updatedAt
+  updatedAt    DateTime   @updatedAt
 }
 
 model Product {
@@ -50,19 +50,21 @@ model Product {
   menuCategoryId String
   orderProducts  OrderProduct[]
   createdAt      DateTime       @default(now())
-  updateAt       DateTime       @updatedAt
+  updatedAt      DateTime       @updatedAt
 }
 
 model Order {
   id                Int               @id @default(autoincrement())
   total             Float
   status            OrderStatus
+  customerName      String
+  customerCpf       String
   consumptionMethod ConsumptionMethod
   restaurant        Restaurant        @relation(fields: [restaurantId], references: [id], onDelete: Cascade)
   restaurantId      String
   orderProducts     OrderProduct[]
   createdAt         DateTime          @default(now())
-  updateAt          DateTime          @updatedAt
+  updatedAt         DateTime          @updatedAt
 }
 
 model OrderProduct {
@@ -74,7 +76,7 @@ model OrderProduct {
   quantity  Int
   price     Float
   createdAt DateTime @default(now())
-  updateAt  DateTime @updatedAt
+  updatedAt DateTime @updatedAt
 }
 
 enum OrderStatus {
